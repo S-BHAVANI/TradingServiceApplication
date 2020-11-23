@@ -2,14 +2,16 @@ package com.cg.tradingservice.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
+
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+
 /** This is an entity class for Company Manager with getters and setters  and constructor
  * 
  * @author Bhavani's
- * @version 1.0
+ * @version 2.0
  *
  */
 @Entity
@@ -34,22 +36,6 @@ public class CompanyManager {
 		
 	}
 
-	public CompanyManager(int companyManagerId, String companyManagerCompanyName, String companyManagerEmail,
-			String companyManagerPhone) {
-		super();
-		this.companyManagerId = companyManagerId;
-		this.companyManagerCompanyName = companyManagerCompanyName;
-		this.companyManagerEmail = companyManagerEmail;
-		this.companyManagerPhone = companyManagerPhone;
-	}
-
-	@Override
-	public String toString() {
-		return "CompanyManager [companyManagerId=" + companyManagerId + ", companyManagerCompanyName="
-				+ companyManagerCompanyName + ", companyManagerEmail=" + companyManagerEmail + ", companyManagerPhone="
-				+ companyManagerPhone + "]";
-	}
-	
 	
 	public int getCompanyManagerId() {
 		return companyManagerId;

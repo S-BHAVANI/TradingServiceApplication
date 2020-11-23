@@ -9,27 +9,16 @@
         <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
             <PatternLayout pattern="${LOG_PATTERN}"/>
         </Console>
-        
-      <File name="MyFile.txt" fileName="E:/MyFile.txt">
-      <PatternLayout>
-        <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
-      </PatternLayout>
-    </File>
-    
-    
     </Appenders>
     <Loggers>
-        <Logger name="com.cg.tradingservice" level="info" additivity="false">
+        <Logger name="com.cg.tradingservice" level="info,debug" additivity="false">
          
             <AppenderRef ref="ConsoleAppender" />
-                 <AppenderRef ref="fileAppender" />
-            
-            
         </Logger>
 
         <Root level="info">
             <AppenderRef ref="ConsoleAppender" />
-              <AppenderRef ref="fileAppender" />
+             
         </Root>
     </Loggers>
     

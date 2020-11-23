@@ -10,6 +10,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+/** This is an entity class for Company Manager with getters and setters  and constructor
+ * 
+ * @author Bhavani's
+ * @version 2.0
+ *
+ */
 @Entity 
 @Table(name ="INVESTOR")
 public class Investor {
@@ -38,18 +45,6 @@ public class Investor {
     
 	public Investor() {
 		
-	}
-
-	public Investor(int investorId, String investorName, String investorPannum, String investorEmail,
-			String investorPhone, int numOfStocks, int investorInvestment) {
-		super();
-		this.investorId = investorId;
-		this.investorName = investorName;
-		this.investorPannum = investorPannum;
-		this.investorEmail = investorEmail;
-		this.investorPhone = investorPhone;
-		this.numOfStocks = numOfStocks;
-		this.investorInvestment = investorInvestment;
 	}
 	
 	
@@ -112,17 +107,6 @@ public class Investor {
 	public void setInvestorInvestment(int investorInvestment) {
 		this.investorInvestment = investorInvestment;
 	}
-
-	@Override
-	public String toString() {
-		return "Investor [investorId=" + investorId + ", investorName=" + investorName + ", investorPannum="
-				+ investorPannum + ", investorEmail=" + investorEmail + ", investorPhone=" + investorPhone
-				+ ", numOfStocks=" + numOfStocks + ", investorInvestment=" + investorInvestment + "]";
-	}
-
-	
-	
    
-	   
 
 }

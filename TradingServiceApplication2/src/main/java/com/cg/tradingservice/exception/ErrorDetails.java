@@ -2,6 +2,12 @@ package com.cg.tradingservice.exception;
 
 import java.util.Date;
 
+
+/** Error Details
+ * 
+ * @author Bhavani's, Akhil's, Kavya's
+ *
+ */
 public class ErrorDetails {
 	private Date timestamp;
 	private String message;

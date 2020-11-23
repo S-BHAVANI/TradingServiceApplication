@@ -29,6 +29,11 @@ import com.cg.tradingservice.model.Investor;
 
 
 
+/** The CompanyManagerAdminRepositoryTest class provides testing of CompanyManagerAdminRepository layer
+ *   
+ * @author Bhavani's
+ * 
+ */
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -74,7 +79,7 @@ public class CompanyManagerAdminRepositoryTest {
 	    	
 
 		    List<CompanyManager> companymanagers = (List<CompanyManager>)companyManagerAdminRepository.findAll();
-		    Assert.assertEquals(companymanagers.size(), 1);      
+		    Assert.assertEquals(1,companymanagers.size());      
 
 	    }
  

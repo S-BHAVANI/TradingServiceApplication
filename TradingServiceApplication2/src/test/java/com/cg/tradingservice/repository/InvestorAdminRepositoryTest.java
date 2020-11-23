@@ -14,6 +14,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.cg.tradingservice.model.Investor;
 
+
+/** The InvestorAdminRepositoryTest class provides testing of InvestorAdminRepository layer
+ *   
+ * @author Bhavani's
+ * 
+ */
+
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class InvestorAdminRepositoryTest {
@@ -56,7 +63,7 @@ public class InvestorAdminRepositoryTest {
 	        
 
 	    List<Investor> investors = (List<Investor>)investorAdminRepository.findAll();
-	    Assert.assertEquals(investors.size(), 1);      
+	    Assert.assertEquals(1,investors.size());      
 
  }  
 	 @Test

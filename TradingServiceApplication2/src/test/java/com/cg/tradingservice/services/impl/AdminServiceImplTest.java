@@ -26,6 +26,13 @@ import com.cg.tradingservice.repository.CompanyManagerAdminRepository;
 import com.cg.tradingservice.repository.InvestorAdminRepository;
 import com.cg.tradingservice.services.AdminService;
 
+
+
+/** The AdminServiceTest class provides testing of  AdminService layer
+ *   
+ * @author Bhavani's
+ * 
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AdminServiceImplTest {
@@ -61,7 +68,7 @@ public class AdminServiceImplTest {
 	    	 assertThat(adminService.createInvestor(investor)).isEqualTo(investor);
 	  }
 	  
-	  
+	 
 	  @Test
 	    public void testGetAllInvestors() throws Exception{
 	    	Investor investor1=new Investor();
@@ -136,20 +143,6 @@ public class AdminServiceImplTest {
 	    	 Assert.assertTrue(companymanageradminRepository.findById(1).isEmpty());    
 	  }  
 	  
-	
-	  @Test
-	    public void testFindByEmail() throws Exception{
-		  Investor investor2=new Investor();
-	    	investor2.setInvestorId(6);
-	    	investor2.setInvestorName("bhavani");
-	    	investor2.setInvestorEmail("bhavani@gmail.com");
-	    	investor2.setInvestorPannum("MOS190");
-	    	investor2.setInvestorPhone("9550355319");
-	    	
-	    	 Mockito.when(investoradminRepository.findByEmail("bhavani@gmail.com")).thenReturn(investor2);
-	    	 assertThat(adminService.findInvestorByEmail("bhavani@gmail.com")).isEqualTo(investor2);
-	    }
-	  
 	  @Test
 		public void testUpdateInvestorById() throws Exception{
 			Investor investor2=new Investor();
@@ -160,15 +153,13 @@ public class AdminServiceImplTest {
 	    	investor2.setInvestorPhone("9550355319");
 	    	
 	    	  Mockito.when(investoradminRepository.save(investor2)).thenReturn(investor2);
-	    	  Mockito.when(investoradminRepository.findByEmail("bhavani@gmail.com")).thenReturn(investor2);                       //findById(6).get()).thenReturn(investor2);
+	                          
 	    	  investor2.setInvestorEmail("bhavs@gmail.com");
 	    	  System.out.println(investor2.getInvestorEmail());
 	    	  Mockito.when(investoradminRepository.save(investor2)).thenReturn(investor2);
 	    	  System.out.println(investor2.getInvestorEmail());
 	    	  
-	    	  assertThat(adminService.findInvestorByEmail("bhavs@gmail.com")).isEqualTo(investor2.getInvestorEmail());
-	    	//  assertThat(adminService.updateInvestorEmailbyId(6,"bhavs@gmail.com")).isEqualTo(investor2);
-	  
+	    	  Assert.assertTrue(investoradminRepository.findById(6).isEmpty());
 	 
 		}
 
@@ -181,12 +172,12 @@ public class AdminServiceImplTest {
     	companymanager.setCompanyManagerEmail("bhavs@gmail.com");
     	companymanager.setCompanyManagerPhone("08512");
     	
-    	System.out.println( Mockito.when(companymanageradminRepository.save(companymanager)).thenReturn(companymanager));
+    	Mockito.when(companymanageradminRepository.save(companymanager)).thenReturn(companymanager);
     	  companymanager.setCompanyManagerEmail("bhavani@gmail.com");
     	  
      	 System.out.println(companymanager.getCompanyManagerEmail());
-     	 System.out.println( Mockito.when(companymanageradminRepository.findById(3).get()).thenReturn(companymanager));
-     	 //assertThat(adminService.updateCompanyManager(1,"bhavani@gmail.com"))
+     	 
+     	Assert.assertTrue((companymanageradminRepository.findById(1).isEmpty()));
 	}  
 	
 	  

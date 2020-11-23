@@ -38,8 +38,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
-
-
+/** The AdminControllerTest class provides testing of AdminDetailsController layer
+ *   
+ * @author Bhavani's
+ * 
+ */
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = AdminController.class)
 public class AdminControllerTest {
@@ -52,7 +55,7 @@ public class AdminControllerTest {
 	
 	
 	 @Test
-	   public void testNewCompanyManager() throws Exception{
+	   public void testCreateCompanyManager() throws Exception{
 		  String URI = "/api/v2/CreateCompanyManager";
 		  CompanyManager companymanager=new CompanyManager();
 		  companymanager.setCompanyManagerId(3);
@@ -72,7 +75,7 @@ public class AdminControllerTest {
 	 
 	 
 	 @Test
-	   public void testNewInvestor() throws Exception{
+	   public void testCreateInvestor() throws Exception{
 		  String URI = "/api/v2/CreateInvestor";
 		  Investor investor=new Investor();
 		  investor.setInvestorId(4);
@@ -92,7 +95,7 @@ public class AdminControllerTest {
 	 
 	 }  
 	 @Test
-	 public void testDeleteCompanyManagerById() throws Exception{
+	 public void testDeleteCompanyManager() throws Exception{
 		 String URI = "/api/v2/CompanyManager/{id}";
 		  CompanyManager companymanager=new CompanyManager();
 	    	companymanager.setCompanyManagerId(1);
@@ -101,6 +104,10 @@ public class AdminControllerTest {
 	    	companymanager.setCompanyManagerPhone("08512");
 	    	
 	    	adminService.deleteCompanyManager(companymanager.getCompanyManagerId());
+	    	
+	    assertThat(adminService.deleteCompanyManager(1)).isFalse();
+	    	
+	    	
 	  } 
 	 @Test
 	 public void testDeleteInvestorById() throws Exception{
@@ -111,7 +118,8 @@ public class AdminControllerTest {
 	    	investor.setInvestorEmail("bhavani@gmail.com");
 	    	investor.setInvestorPannum("MOS190");
 	    	investor.setInvestorPhone("9550355319");
-	    	adminService.deleteCompanyManager(investor.getInvestorId());//.getCompanyManagerId());
+	    	adminService.deleteCompanyManager(investor.getInvestorId());
+	    	assertThat(adminService.deleteInvestorById(3)).isFalse();
 	  }
 
 	    @Test
