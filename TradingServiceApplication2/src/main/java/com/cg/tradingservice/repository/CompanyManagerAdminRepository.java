@@ -19,8 +19,8 @@ import com.cg.tradingservice.model.CompanyManager;
 public interface CompanyManagerAdminRepository extends  JpaRepository<CompanyManager, Integer>  {
 
 	
-	@Query(value="select * from CompanyManager where Investor_Id=?1",nativeQuery=true)
-	  CompanyManager findInvestorById(Integer investorId);
+	@Query(value="select * from CompanyManager where CompanyManager_Id=?1",nativeQuery=true)
+	  CompanyManager findCompanyManagerById(Integer companyManagerId);
 	
 	
 }

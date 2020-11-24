@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModelProperty;
+
 
 /** This is an entity class for Company Manager with getters and setters  and constructor
  * 
@@ -18,16 +20,20 @@ import javax.persistence.Table;
 @Table(name ="COMPANY_MANAGER")
 public class CompanyManager {
 	
+	@ApiModelProperty(notes = "Id of the Company Manager",name="companyManagerId",required=true,value="Company Manager Id")
 	@Id
 	@Column(name = "company_manager_id", nullable = false)
 	private int companyManagerId;	
 	
+	@ApiModelProperty(notes = "Name of the Company Manager Company Name",name="companyManagerCompanyName",required=true,value="Company Manager Company Name")
 	@Column(name = "company_manager_companyname", nullable = false)
 	private String companyManagerCompanyName;
 	
+	@ApiModelProperty(notes = "Email of the Company Manager",name="companyManagerEmail",required=true,value="Company Manager Email")
 	@Column(name = "company_manager_email", nullable = false)
 	private String companyManagerEmail;
 	
+	@ApiModelProperty(notes = "Phone Number of the Company Manager",name="companyManagerPhone",required=true,value="Company Manager Phone Number")
 	@Column(name = "company_manager_phone", nullable = false)
 	private String companyManagerPhone;
     

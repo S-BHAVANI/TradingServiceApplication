@@ -23,6 +23,11 @@ import com.cg.tradingservice.model.CompanyManager;
 import com.cg.tradingservice.model.Investor;
 import com.cg.tradingservice.services.AdminService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 
 /** This is a Controller class for Admin details 
  * 
@@ -31,7 +36,7 @@ import com.cg.tradingservice.services.AdminService;
  *
  */
 
-
+@Api(value = "AdminController", description = "REST Apis related to Company Manager and Investor Entity!!!!")
 @RestController
 @RequestMapping("/api/v2")
 public class AdminController {
@@ -43,7 +48,7 @@ public class AdminController {
 	private AdminService adminService;
 	
 	
-	
+	@ApiOperation(value = "Creating specific Company Manager in the System ", response = CompanyManager.class)
 	/** This method adds the Company Manager details 
 	 * 
 	 * @param delivery - Company Manager entity details
@@ -52,13 +57,13 @@ public class AdminController {
 	 */
 	
 	@PostMapping("/CreateCompanyManager")
-	public CompanyManager createCompanyManger( @RequestBody CompanyManager companymanager) {
+	public CompanyManager createCompanyManager( @RequestBody CompanyManager companymanager) {
 		logger.info("creating companymanager");
 		return adminService.createCompanyManager(companymanager);
 	} 
 	
 	
-	
+	@ApiOperation(value = "Updating specific Company Manager in the System ", response = CompanyManager.class)
 	/** This method changes the Company Manager details 
 	 * 
 	 * @param delivery - Company Manager entity details
@@ -76,7 +81,7 @@ public class AdminController {
 	}  
 
 	
-	
+	@ApiOperation(value = "delete specific Company Manager in the System ", response = CompanyManager.class)
 	/** This method deletes the Company Manager details 
 	 * 
 	 * @param delivery - Company Manager Id details
@@ -92,7 +97,12 @@ public class AdminController {
 		return  true;
 	}
 	
-	
+	@ApiOperation(value = "Get list of Company Managers in the System ", response = Iterable.class)
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "Suceess|OK"),
+			@ApiResponse(code = 401, message = "not authorized!"), 
+			@ApiResponse(code = 403, message = "forbidden!!!"),
+			@ApiResponse(code = 404, message = "not found!!!") })
 	
 	/** This method returns list of all Company Manager details 
 	 * 
@@ -107,7 +117,13 @@ public class AdminController {
 		return adminService.getAllCompanyManager();
 	} 
 	
-
+	
+	@ApiOperation(value = "Get list of Investors in the System ", response = Iterable.class)
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "Suceess|OK"),
+			@ApiResponse(code = 401, message = "not authorized!"), 
+			@ApiResponse(code = 403, message = "forbidden!!!"),
+			@ApiResponse(code = 404, message = "not found!!!") })
 	
 	/** This method returns list of all Investor details 
 	 * 
@@ -123,7 +139,7 @@ public class AdminController {
 	} 
 	
 	
-	
+	@ApiOperation(value = "Creating specific Investor in the System ", response = Investor.class)
 	/** This method adds the Investor details 
 	 * 
 	 * @param delivery - Investor entity details
@@ -138,7 +154,7 @@ public class AdminController {
 		
 	} 
 	
-	
+	@ApiOperation(value = "Update specific Investor in the System ", response = Investor.class)
 	/** This method changes the Investor details 
 	 * 
 	 * @param delivery - Investor entity details
@@ -154,8 +170,8 @@ public class AdminController {
 		return  investor;
 	}  
 	
-	
-	
+
+	@ApiOperation(value = "delete specific Investor in the System ", response = Investor.class)
 	/** This method deletes the Investor details 
 	 * 
 	 * @param delivery - Investor Id details
@@ -172,11 +188,6 @@ public class AdminController {
 		return true;
 		
 	}  
-
-
-	
-	
-
 
 
 }
