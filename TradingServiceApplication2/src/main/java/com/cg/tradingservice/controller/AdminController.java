@@ -1,14 +1,15 @@
 package com.cg.tradingservice.controller;
 
+import java.util.HashMap;
 import java.util.List;
-
-
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import com.cg.tradingservice.model.CompanyManager;
 import com.cg.tradingservice.model.Investor;
 import com.cg.tradingservice.services.AdminService;
 
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -35,7 +37,7 @@ import io.swagger.annotations.ApiResponses;
  *  @version 2.0
  *
  */
-
+@CrossOrigin(origins = "http://localhost:3000")
 @Api(value = "AdminController", description = "REST Apis related to Company Manager and Investor Entity!!!!")
 @RestController
 @RequestMapping("/api/v2")
@@ -56,7 +58,7 @@ public class AdminController {
 	 * 
 	 */
 	
-	@PostMapping("/CreateCompanyManager")
+	@PostMapping("/CompanyManager")
 	public CompanyManager createCompanyManager( @RequestBody CompanyManager companymanager) {
 		logger.info("creating companymanager");
 		return adminService.createCompanyManager(companymanager);
@@ -73,11 +75,11 @@ public class AdminController {
 	
 	
 	@PutMapping("/CompanyManager/{id}")
-	public CompanyManager updateCompanyManager(@PathVariable(value = "id") Integer companyManagerId,
+	public ResponseEntity<ResponseEntity<CompanyManager>> updateCompanyManager(@PathVariable(value = "id") Integer companyManagerId,
 			 @RequestBody CompanyManager companymanagerDetails) throws ResourceNotFoundException {
-		CompanyManager companymanager = adminService.updateCompanyManager(companyManagerId, companymanagerDetails);
+		ResponseEntity<CompanyManager> companymanager = adminService.updateCompanyManager(companyManagerId, companymanagerDetails);
 		logger.info("Updating Company Manager Details");
-		return  companymanager;
+		return ResponseEntity.ok(companymanager);
 	}  
 
 	
@@ -117,6 +119,13 @@ public class AdminController {
 		return adminService.getAllCompanyManager();
 	} 
 	
+	// get employee by id rest api
+	@GetMapping("/CompanyManager/{id}")
+	public ResponseEntity<CompanyManager> getCompanyManagerById(@PathVariable(value = "id") Integer companyManagerId) {
+		CompanyManager companymanager = adminService.findById(companyManagerId);
+		return ResponseEntity.ok(companymanager);
+	}
+	
 	
 	@ApiOperation(value = "Get list of Investors in the System ", response = Iterable.class)
 	@ApiResponses(value = { 
@@ -147,7 +156,7 @@ public class AdminController {
 	 * 
 	 */
 	
-	@PostMapping("/CreateInvestor")
+	@PostMapping("/Investor")
 	public Investor createInvestor( @RequestBody Investor investor) {
 		logger.info("creating investor");
 		return adminService.createInvestor(investor);
@@ -180,14 +189,19 @@ public class AdminController {
 	 */
 	
 
-	@DeleteMapping("/Investor/{id}")	
-	public boolean deleteInvestorById(@PathVariable(value = "id") Integer investorId,
-			 @RequestBody Investor investorDetails) throws ResourceNotFoundException	{
-		adminService.deleteInvestorById(investorId);
-		logger.info("Deleting investor details");
-		return true;
-		
+     @DeleteMapping("/Investor/{investorId}")	
+	public boolean deleteInvestor(@PathVariable Integer investorId)
+			throws ResourceNotFoundException	{
+		return adminService.deleteInvestor(investorId);
 	}  
-
+	
+	
+	
+	// get employee by id rest api
+		@GetMapping("/Investor/{id}")
+		public ResponseEntity<Investor> getInvestorById(@PathVariable(value = "id") Integer investorId) {
+			Investor investor = adminService.findInvestorById(investorId);
+			return ResponseEntity.ok(investor);
+		}
 
 }

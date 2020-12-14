@@ -1,17 +1,18 @@
 package com.cg.tradingservice.services.impl;
 
 
+import java.util.HashMap;
 import java.util.List;
-
-
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -22,6 +23,7 @@ import com.cg.tradingservice.model.Investor;
 import com.cg.tradingservice.repository.CompanyManagerAdminRepository;
 import com.cg.tradingservice.repository.InvestorAdminRepository;
 import com.cg.tradingservice.services.AdminService;
+
 
 
 /** The AdminServiceImpl class provides access to repository CRUD methods for Company Manager and Investor details
@@ -50,7 +52,7 @@ public class AdminServiceImpl  implements AdminService {
 			return  companymanageradminRepository.save(companymanager);
 		}
 	 
-	 public CompanyManager updateCompanyManager(@PathVariable(value = "id") Integer companyManagerId,
+	 public ResponseEntity<CompanyManager> updateCompanyManager(@PathVariable(value = "id") Integer companyManagerId,
 			 @RequestBody CompanyManager companymanagerDetails) throws ResourceNotFoundException {
 		CompanyManager companymanager = companymanageradminRepository.findById(companyManagerId)
 				.orElseThrow(() -> new ResourceNotFoundException("Company Manager not found for this id :: " + companyManagerId));
@@ -58,7 +60,8 @@ public class AdminServiceImpl  implements AdminService {
 		companymanager.setCompanyManagerCompanyName(companymanagerDetails.getCompanyManagerCompanyName());
 		companymanager.setCompanyManagerEmail(companymanagerDetails.getCompanyManagerEmail());
 		companymanager.setCompanyManagerPhone(companymanagerDetails.getCompanyManagerPhone());
-		return  companymanageradminRepository.save(companymanager);
+	           CompanyManager updatedCompanyManager=companymanageradminRepository.save(companymanager);
+	  return ResponseEntity.ok(updatedCompanyManager);
 		 
 		
 	}  
@@ -96,18 +99,45 @@ public class AdminServiceImpl  implements AdminService {
 		
 	} 
 	 
-	 public boolean deleteInvestorById(@PathVariable(value = "id") Integer investorId)
-				throws ResourceNotFoundException {
-		 Investor investor = investoradminRepository.findById(investorId)
-					.orElseThrow(() -> new ResourceNotFoundException("Investor not found for this id :: " + investorId));
-		 investoradminRepository.findById(investorId);
-			investoradminRepository.delete(investor);
-			return true;
-	}
+//	 public boolean  deleteInvestorById(@PathVariable(value = "id") Integer investorId)
+//				throws ResourceNotFoundException {
+//		 Investor investor = investoradminRepository.findById(investorId)
+//					.orElseThrow(() -> new ResourceNotFoundException("Investor not found for this id :: " + investorId));
+//		 investoradminRepository.findById(investorId);
+//			investoradminRepository.delete(investor);
+//			return true;
+//	} 
+	 
+	
+	 @Override
+		public boolean deleteInvestor(Integer investorId) throws ResourceNotFoundException {
+			// TODO Auto-generated method stub
+		 investoradminRepository.deleteById(investorId);
+			return false;
+		}
+
+	
 	
 	 public List<Investor> getAllInvestor() {
 			 return investoradminRepository.findAll();
 			}
+
+	@Override
+	public CompanyManager findById(Integer companyManagerId) {
+		// TODO Auto-generated method stub
+	  return companymanageradminRepository.findById(companyManagerId).get();
+	}
+
+	@Override
+	public Investor findInvestorById(Integer investorId) {
+		// TODO Auto-generated method stub
+		return investoradminRepository.findById(investorId).get();
+	}
+
+	
+
+	
+
 	
 
 	

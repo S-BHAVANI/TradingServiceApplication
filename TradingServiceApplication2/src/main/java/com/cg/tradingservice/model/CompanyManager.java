@@ -2,8 +2,8 @@ package com.cg.tradingservice.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -22,6 +22,7 @@ public class CompanyManager {
 	
 	@ApiModelProperty(notes = "Id of the Company Manager",name="companyManagerId",required=true,value="Company Manager Id")
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "company_manager_id", nullable = false)
 	private int companyManagerId;	
 	
